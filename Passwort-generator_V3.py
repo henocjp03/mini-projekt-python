@@ -1,35 +1,35 @@
 import random
 import string
 
-def generate_password(length=8):
-    if length < 8:
-        raise ValueError("La longueur minimale du mot de passe est de 8 caractères")
+def create_password(length):
+    pass_list = ""
+    lowercase = string.ascii_lowercase
+    uppercase = string.ascii_uppercase
+    digits = string.digits
+    punctuation = string.punctuation
+    all = lowercase+uppercase+digits+punctuation
+    i=0
+    while i<4:
+        pass_list += random.choice(lowercase)
+        i+=1
+        
+    while i<6:
+        pass_list += random.choice(uppercase)
+        i+=1
+    while i<7:
+        pass_list += random.choice(digits)
+        i+=1
+    while i<8:
+        pass_list += random.choice(punctuation)
+        i+=1
+    while i<length:
+        pass_list += random.choice(all)
+        i+=1
     
-    min_required_length = 2 + 4 + 1 + 1 
-    if length < min_required_length:
-        raise ValueError(f"La longueur doit être d'au moins {min_required_length} caractères pour satisfaire toutes les conditions")
-    
-    uppercase_chars = ''.join(random.choices(string.ascii_uppercase, k=2))
-    lowercase_chars = ''.join(random.choices(string.ascii_lowercase, k=4))
-    digit_chars = ''.join(random.choices(string.digits, k=1))
-    special_chars = ''.join(random.choices(string.punctuation, k=1))
-    
-    remaining_length = length - (2 + 4 + 1 + 1)
-    all_chars = string.ascii_letters + string.digits + string.punctuation
-    remaining_chars = ''.join(random.choices(all_chars, k=remaining_length))
-    
-    password_chars = uppercase_chars + lowercase_chars + digit_chars + special_chars + remaining_chars
-    
-    password_list = list(password_chars)
-    random.shuffle(password_list)
-    
-    password = ''.join(password_list)
-    
+    random.shuffle(list(pass_list))
+    password = "".join(pass_list)
     return password
-
+    
 if __name__ == "__main__":
-    try:
-        pwd = generate_password(8)
-        print(f"Mot de passe généré: {pwd}")
-    except ValueError as e:
-        print(f"Erreur: {e}")
+    pass8 = create_password(10)
+    print(pass8)
